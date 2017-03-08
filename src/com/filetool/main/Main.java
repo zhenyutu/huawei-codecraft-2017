@@ -28,7 +28,7 @@ public class Main
         // 功能实现入口
         String[] resultContents = Deploy.deployServer(graphContent);
 
-        System.out.println(Arrays.toString(graphContent));
+        System.out.println(Arrays.toString(resultContents));
     }
     
     private static boolean hasResults(String[] resultContents)

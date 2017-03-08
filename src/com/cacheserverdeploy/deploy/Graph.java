@@ -1,5 +1,7 @@
 package com.cacheserverdeploy.deploy;
 
+import java.util.Scanner;
+
 /**
  * Created by tuzhenyu on 17-3-8.
  * @author tuzhenyu
@@ -16,6 +18,23 @@ public class Graph {
 
         for (int i=0;i<vertexNum;i++){
             adj[i] = new Bag<>();
+        }
+    }
+
+    public Graph(String[] graphContent){
+        this(new Scanner(graphContent[0]).useDelimiter(" ").nextInt());
+        Scanner scanner = new Scanner(graphContent[0]);
+        scanner.useDelimiter(" ");
+        int vertexNum = scanner.nextInt();
+        int edgeNum = scanner.nextInt();
+        System.out.println(edgeNum);
+        for(int i=0;i<edgeNum;i++){
+            Scanner tempScanner = new Scanner(graphContent[i+4]);
+            tempScanner.useDelimiter(" ");
+            int vertex1 = tempScanner.nextInt();
+            int vertex2 = tempScanner.nextInt();
+
+            addEdge(vertex1,vertex2);
         }
     }
 
