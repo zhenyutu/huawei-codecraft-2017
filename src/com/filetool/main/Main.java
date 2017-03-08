@@ -4,6 +4,8 @@ import com.cacheserverdeploy.deploy.Deploy;
 import com.filetool.util.FileUtil;
 import com.filetool.util.LogUtil;
 
+import java.util.Arrays;
+
 /**
  * 
  * 工具入口
@@ -16,14 +18,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        if (args.length != 2)
-        {
-            System.err.println("please input args: graphFilePath, resultFilePath");
-            return;
-        }
-
-        String graphFilePath = args[0];
-        String resultFilePath = args[1];
+        String graphFilePath = "/home/tuzhenyu/tmp/case_example/case0.txt";
 
         LogUtil.printLog("Begin");
 
@@ -33,16 +28,7 @@ public class Main
         // 功能实现入口
         String[] resultContents = Deploy.deployServer(graphContent);
 
-        // 写入输出文件
-        if (hasResults(resultContents))
-        {
-            FileUtil.write(resultFilePath, resultContents, false);
-        }
-        else
-        {
-            FileUtil.write(resultFilePath, new String[] { "NA" }, false);
-        }
-        LogUtil.printLog("End");
+        System.out.println(Arrays.toString(graphContent));
     }
     
     private static boolean hasResults(String[] resultContents)

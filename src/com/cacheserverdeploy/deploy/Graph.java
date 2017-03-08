@@ -1,4 +1,4 @@
-package cn.tzy.app;
+package com.cacheserverdeploy.deploy;
 
 /**
  * Created by tuzhenyu on 17-3-8.

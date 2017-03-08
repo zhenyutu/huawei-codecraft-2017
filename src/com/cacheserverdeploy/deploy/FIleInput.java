@@ -1,4 +1,4 @@
-package cn.tzy.app;
+package com.cacheserverdeploy.deploy;
 
 import java.io.File;
 import java.io.IOException;
