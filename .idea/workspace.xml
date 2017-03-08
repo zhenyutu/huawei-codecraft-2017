@@ -19,15 +19,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/cn/tzy/app/Main.java">
+      <file leaf-file-name="Graph.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/cn/tzy/app/Graph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-              <folding>
-                <element signature="e#146#147#0" expanded="true" />
-                <element signature="e#195#196#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="115">
+              <caret line="5" column="18" lean-forward="false" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -50,6 +47,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/cn/tzy/app/Bag.java" />
         <option value="$PROJECT_DIR$/src/cn/tzy/app/Main.java" />
       </list>
     </option>
@@ -548,12 +546,12 @@
       <option name="presentableId" value="Default" />
       <updated>1488947884707</updated>
       <workItem from="1488947888029" duration="14000" />
-      <workItem from="1488948037308" duration="255000" />
+      <workItem from="1488948037308" duration="2912000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="269000" />
+    <option name="totallyTimeSpent" value="2926000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-4" width="1920" height="1084" extended-state="6" />
@@ -629,14 +627,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/tzy/app/Bag.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+          <folding>
+            <marker date="1488958604090" expanded="true" signature="49:110" ph="/**...*/" />
+            <marker date="1488958604090" expanded="true" signature="207:252" ph="{...}" />
+            <marker date="1488958604090" expanded="true" signature="283:407" ph="{...}" />
+            <marker date="1488958604090" expanded="false" signature="444:454" ph=" { " />
+            <marker date="1488958604090" expanded="false" signature="480:486" ph=" }" />
+            <marker date="1488958604090" expanded="true" signature="543:836" ph="{...}" />
+            <marker date="1488958604090" expanded="false" signature="615:629" ph=" { " />
+            <marker date="1488958604090" expanded="false" signature="652:662" ph=" }" />
+            <marker date="1488958604090" expanded="true" signature="720:830" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/cn/tzy/app/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+        <state relative-caret-position="312">
+          <caret line="14" column="19" lean-forward="true" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
           <folding>
-            <element signature="e#146#147#0" expanded="true" />
-            <element signature="e#195#196#0" expanded="true" />
+            <marker date="1488958682550" expanded="true" signature="56:117" ph="/**...*/" />
+            <marker date="1488958682550" expanded="true" signature="181:384" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cn/tzy/app/Graph.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="5" column="18" lean-forward="false" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
