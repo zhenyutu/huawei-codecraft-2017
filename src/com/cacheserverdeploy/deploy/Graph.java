@@ -9,12 +9,12 @@ import java.util.Scanner;
 public class Graph {
     private int vertexNum;
     private int edgeNum;
-    private Bag<Integer>[] adj;
+    private Bag<Edge>[] adj;
 
     public Graph(int vertexNum){
         this.vertexNum = vertexNum;
         this.edgeNum = 0;
-        this.adj = (Bag<Integer>[]) new Bag[vertexNum];
+        this.adj = (Bag<Edge>[]) new Bag[vertexNum];
 
         for (int i=0;i<vertexNum;i++){
             adj[i] = new Bag<>();
@@ -30,10 +30,12 @@ public class Graph {
         for(int i=0;i<edgeNum;i++){
             Scanner tempScanner = new Scanner(graphContent[i+4]);
             tempScanner.useDelimiter(" ");
-            int vertex1 = tempScanner.nextInt();
-            int vertex2 = tempScanner.nextInt();
+            int startPoint = tempScanner.nextInt();
+            int endPoint = tempScanner.nextInt();
+            int cost = tempScanner.nextInt();
+            int capacity = tempScanner.nextInt();
 
-            addEdge(vertex1,vertex2);
+            addEdge(new Edge(startPoint,endPoint,cost,capacity));
         }
     }
 
@@ -45,13 +47,15 @@ public class Graph {
         return edgeNum;
     }
 
-    public Iterable<Integer> getAdj(int vertex){
+    public Iterable<Edge> getAdj(int vertex){
         return adj[vertex];
     }
 
-    public void addEdge(int m,int n){
-        adj[m].add(n);
-        adj[n].add(m);
+    public void addEdge(Edge edge){
+        int startPoint = edge.getStartPoint();
+        int endPoint = edge.getEndPoint();
+        adj[startPoint].add(edge);
+        adj[endPoint].add(edge);
         edgeNum++;
     }
 
@@ -59,8 +63,8 @@ public class Graph {
         String s = vertexNum + " vertex," + edgeNum + " edge\n";
         for (int i=0;i<vertexNum;i++){
             s+= i+": ";
-            for (int adj : this.adj[i]){
-                s+=adj + " ";
+            for (Edge adj : this.adj[i]){
+                s+=adj.toString() + " ";
             }
             s+="\n";
         }
