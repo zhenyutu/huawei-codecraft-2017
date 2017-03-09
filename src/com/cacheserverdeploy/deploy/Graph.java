@@ -27,7 +27,6 @@ public class Graph {
         scanner.useDelimiter(" ");
         int vertexNum = scanner.nextInt();
         int edgeNum = scanner.nextInt();
-        System.out.println(edgeNum);
         for(int i=0;i<edgeNum;i++){
             Scanner tempScanner = new Scanner(graphContent[i+4]);
             tempScanner.useDelimiter(" ");
@@ -54,6 +53,18 @@ public class Graph {
         adj[m].add(n);
         adj[n].add(m);
         edgeNum++;
+    }
+
+    public String toString(){
+        String s = vertexNum + " vertex," + edgeNum + " edge\n";
+        for (int i=0;i<vertexNum;i++){
+            s+= i+": ";
+            for (int adj : this.adj[i]){
+                s+=adj + " ";
+            }
+            s+="\n";
+        }
+        return s;
     }
 
 }

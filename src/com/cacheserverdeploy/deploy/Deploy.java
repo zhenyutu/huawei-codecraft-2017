@@ -12,6 +12,7 @@ public class Deploy
     public static String[] deployServer(String[] graphContent)
     {
         Graph graph = new Graph(graphContent);
+        System.out.println(graph.toString());
         return new String[]{"17","\r\n","0 8 0 20"};
     }
 
