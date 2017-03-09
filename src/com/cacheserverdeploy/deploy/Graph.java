@@ -47,6 +47,17 @@ public class Graph {
         return edgeNum;
     }
 
+    public Bag<Edge> getEdges(){
+        Bag<Edge> bag = new Bag<>();
+        for (int vertex=0;vertex<vertexNum;vertex++){
+            for (Edge edge:adj[vertex]){
+                if (edge.otherPoint(vertex)>vertex)
+                    bag.add(edge);
+            }
+        }
+        return bag;
+    }
+
     public Iterable<Edge> getAdj(int vertex){
         return adj[vertex];
     }

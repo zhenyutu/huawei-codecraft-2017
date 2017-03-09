@@ -7,17 +7,26 @@ import java.util.Iterator;
  * @author tuzhenyu
  */
 public class Bag<Item> implements Iterable<Item>{
+    private int count;
     private Node first;
+
     private class Node{
         Item item;
         Node next;
     }
+
     public void add(Item item){
         Node oldfirst = first;
         first = new Node();
         first.item = item;
         first.next = oldfirst;
+        count++;
     }
+
+    public Integer length(){
+        return count;
+    }
+
     public Iterator<Item> iterator(){
         return new ListIterator();
     }
