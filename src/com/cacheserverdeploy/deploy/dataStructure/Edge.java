@@ -1,10 +1,10 @@
-package com.cacheserverdeploy.deploy;
+package com.cacheserverdeploy.deploy.dataStructure;
 
 /**
  * Created by tuzhenyu on 17-3-9.
  * @author tuzhenyu
  */
-public class Edge {
+public class Edge implements Comparable<Edge>{
     private int startPoint;
     private int endPoint;
     private int cost;
@@ -45,7 +45,7 @@ public class Edge {
     public int compareTo(Edge edge){
         if (this.cost < edge.cost)
             return -1;
-        else if (this.cost>edge.capacity)
+        else if (this.cost>edge.cost)
             return 1;
         else
             return 0;

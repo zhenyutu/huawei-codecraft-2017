@@ -1,4 +1,4 @@
-package com.cacheserverdeploy.deploy;
+package com.cacheserverdeploy.deploy.dataStructure;
 
 import java.util.Iterator;
 
