@@ -1,4 +1,4 @@
-package com.cacheserverdeploy.deploy;
+package com.cacheserverdeploy.deploy.method;
 
 /**
  * Created by tuzhenyu on 17-3-9.

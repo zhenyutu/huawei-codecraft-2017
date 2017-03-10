@@ -1,5 +1,7 @@
 package com.cacheserverdeploy.deploy.dataStructure;
 
+import com.cacheserverdeploy.deploy.method.DepthFirstPaths;
+
 /**
  * Created by tuzhenyu on 17-3-9.
  * @author tuzhenyu
@@ -35,6 +37,19 @@ public class KruskalMST {
 
     public Iterable<Edge> edges() {
         return mst;
+    }
+
+    public Graph getMSTGraph(Queue<Edge> mst){
+        Graph mstGraph = new Graph(mst.size()+1);
+        for (Edge edge:mst){
+            mstGraph.addEdge(edge);
+        }
+        return mstGraph;
+    }
+
+    public Iterable<Integer> pathTo(int start,int end) {
+        DepthFirstPaths path = new DepthFirstPaths(getMSTGraph(mst),start);
+        return path.pathTo(end);
     }
 
     public Integer weight() {

@@ -1,9 +1,9 @@
 package com.cacheserverdeploy.deploy;
 
-import com.cacheserverdeploy.deploy.dataStructure.Edge;
 import com.cacheserverdeploy.deploy.dataStructure.Graph;
 import com.cacheserverdeploy.deploy.dataStructure.KruskalMST;
-import com.cacheserverdeploy.deploy.dataStructure.MinPQ;
+
+import java.util.Arrays;
 
 public class Deploy
 {
@@ -20,8 +20,8 @@ public class Deploy
         System.out.println(graph.toString());
         System.out.println("++++++++++++++++++++++++++++++++++++");
         KruskalMST kruskalMST = new KruskalMST(graph);
-        System.out.println(kruskalMST.edges());
 
+        System.out.println(kruskalMST.pathTo(26,39));
 
         return new String[]{"17","\r\n","0 8 0 20"};
     }
