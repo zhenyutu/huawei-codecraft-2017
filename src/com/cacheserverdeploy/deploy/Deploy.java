@@ -4,6 +4,7 @@ import com.cacheserverdeploy.deploy.dataStructure.Graph;
 import com.cacheserverdeploy.deploy.dataStructure.KruskalMST;
 import com.cacheserverdeploy.deploy.method.DijkstraAllSP;
 import com.cacheserverdeploy.deploy.method.DijkstraSP;
+import com.cacheserverdeploy.deploy.method.SourcePiont;
 
 import java.util.Arrays;
 
@@ -21,10 +22,10 @@ public class Deploy
         Graph graph = new Graph(graphContent);
         Long start = System.currentTimeMillis();
         DijkstraAllSP dijkstraAllSP = new DijkstraAllSP(graph);
-        System.out.println(System.currentTimeMillis()-start);
-        System.out.println(dijkstraAllSP.path(6,39));
-        System.out.println(dijkstraAllSP.path(26,39));
-//        System.out.println(graph.toString());
+        SourcePiont.getSourcePoint(graph);
+        System.out.println(graph.toString());
+        SourcePiont.getSourcePoint(graph);
+        System.out.println(Arrays.toString(graph.getSource()));
 //        System.out.println("++++++++++++++++++++++++++++++++++++");
 //        KruskalMST kruskalMST = new KruskalMST(graph);
 //        System.out.println(kruskalMST.pathTo(6,39));

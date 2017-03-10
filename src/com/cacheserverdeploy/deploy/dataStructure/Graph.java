@@ -10,11 +10,21 @@ public class Graph {
     private int vertexNum;
     private int edgeNum;
     private Bag<Edge>[] adj;
+    private Integer[] consumer;
+    private Boolean[] source;
+    private Integer[] hunger;
+    private Integer sumOfConsumeValue = 0;
 
     public Graph(int vertexNum){
         this.vertexNum = vertexNum;
         this.edgeNum = 0;
         this.adj = (Bag<Edge>[]) new Bag[vertexNum];
+        this.hunger = new Integer[vertexNum];
+        this.source = new Boolean[vertexNum];
+
+        for (int i=0;i<vertexNum;i++){
+            source[i] = false;
+        }
 
         for (int i=0;i<vertexNum;i++){
             adj[i] = new Bag<>();
@@ -27,15 +37,27 @@ public class Graph {
         scanner.useDelimiter(" ");
         int vertexNum = scanner.nextInt();
         int edgeNum = scanner.nextInt();
+        int consumeNum = scanner.nextInt();
+        consumer = new Integer[consumeNum];
         for(int i=0;i<edgeNum;i++){
             Scanner tempScanner = new Scanner(graphContent[i+4]);
             tempScanner.useDelimiter(" ");
             int startPoint = tempScanner.nextInt();
             int endPoint = tempScanner.nextInt();
-            int cost = tempScanner.nextInt();
             int capacity = tempScanner.nextInt();
+            int cost = tempScanner.nextInt();
 
             addEdge(new Edge(startPoint,endPoint,cost,capacity));
+        }
+        for (int i=0;i<consumeNum;i++){
+            Scanner tempScanner = new Scanner(graphContent[i+6]);
+            tempScanner.useDelimiter(" ");
+            int consumePoint = tempScanner.nextInt();
+            int consumeNode = tempScanner.nextInt();
+            int consumeValue = tempScanner.nextInt();
+            consumer[i]=consumeNode;
+            hunger[consumeNode] = consumeValue;
+            sumOfConsumeValue+=consumeValue;
         }
     }
 
@@ -45,6 +67,26 @@ public class Graph {
 
     public int getEdgeNum(){
         return edgeNum;
+    }
+
+    public Integer[] getConsumer(){
+        return consumer;
+    }
+
+    public Integer[] getHunger(){
+        return hunger;
+    }
+
+    public Integer getSumOfConsumeValue(){
+       return sumOfConsumeValue;
+    }
+
+    public Boolean[] getSource(){
+        return source;
+    }
+
+    public void setSource(int i,Boolean b){
+        source[i] = b;
     }
 
     public Bag<Edge> getEdges(){
