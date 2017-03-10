@@ -10,16 +10,14 @@ public class Graph {
     private int vertexNum;
     private int edgeNum;
     private Bag<Edge>[] adj;
-    private Integer[] consumer;
+    private Integer[][] consumer;
     private Boolean[] source;
-    private Integer[] hunger;
     private Integer sumOfConsumeValue = 0;
 
     public Graph(int vertexNum){
         this.vertexNum = vertexNum;
         this.edgeNum = 0;
         this.adj = (Bag<Edge>[]) new Bag[vertexNum];
-        this.hunger = new Integer[vertexNum];
         this.source = new Boolean[vertexNum];
 
         for (int i=0;i<vertexNum;i++){
@@ -38,7 +36,7 @@ public class Graph {
         int vertexNum = scanner.nextInt();
         int edgeNum = scanner.nextInt();
         int consumeNum = scanner.nextInt();
-        consumer = new Integer[consumeNum];
+        consumer = new Integer[consumeNum][2];
         for(int i=0;i<edgeNum;i++){
             Scanner tempScanner = new Scanner(graphContent[i+4]);
             tempScanner.useDelimiter(" ");
@@ -47,7 +45,7 @@ public class Graph {
             int capacity = tempScanner.nextInt();
             int cost = tempScanner.nextInt();
 
-            addEdge(new Edge(startPoint,endPoint,cost,capacity));
+            addEdge(new Edge(startPoint,endPoint,cost,capacity,capacity));
         }
         for (int i=0;i<consumeNum;i++){
             Scanner tempScanner = new Scanner(graphContent[i+6]);
@@ -55,8 +53,8 @@ public class Graph {
             int consumePoint = tempScanner.nextInt();
             int consumeNode = tempScanner.nextInt();
             int consumeValue = tempScanner.nextInt();
-            consumer[i]=consumeNode;
-            hunger[consumeNode] = consumeValue;
+            consumer[i][0]=consumeNode;
+            consumer[i][1] = consumeValue;
             sumOfConsumeValue+=consumeValue;
         }
     }
@@ -69,13 +67,10 @@ public class Graph {
         return edgeNum;
     }
 
-    public Integer[] getConsumer(){
+    public Integer[][] getConsumer(){
         return consumer;
     }
 
-    public Integer[] getHunger(){
-        return hunger;
-    }
 
     public Integer getSumOfConsumeValue(){
        return sumOfConsumeValue;

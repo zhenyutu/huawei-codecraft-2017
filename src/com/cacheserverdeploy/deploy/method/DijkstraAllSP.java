@@ -19,7 +19,7 @@ public class DijkstraAllSP {
         return all[s].pathTo(t);
     }
 
-    public Integer distance(int s,int t){
+    public Integer cost(int s,int t){
         return all[s].distTo(t);
     }
 }

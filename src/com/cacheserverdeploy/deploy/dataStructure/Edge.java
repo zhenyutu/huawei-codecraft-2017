@@ -9,8 +9,9 @@ public class Edge implements Comparable<Edge>{
     private int endPoint;
     private int cost;
     private int capacity;
+    private int LastCapacity;
 
-    public Edge(int startPoint,int endPoint,int cost,int capacity){
+    public Edge(int startPoint,int endPoint,int cost,int capacity,int lastCapacity){
         this.startPoint = startPoint;
         this.endPoint = endPoint;
         this.cost = cost;

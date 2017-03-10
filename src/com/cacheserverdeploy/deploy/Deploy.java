@@ -20,18 +20,17 @@ public class Deploy
     public static String[] deployServer(String[] graphContent)
     {
         Graph graph = new Graph(graphContent);
+        System.out.println(graph.toString());
         Long start = System.currentTimeMillis();
         DijkstraAllSP dijkstraAllSP = new DijkstraAllSP(graph);
         SourcePiont.getSourcePoint(graph);
-        System.out.println(graph.toString());
-        SourcePiont.getSourcePoint(graph);
         System.out.println(Arrays.toString(graph.getSource()));
-//        System.out.println("++++++++++++++++++++++++++++++++++++");
-//        KruskalMST kruskalMST = new KruskalMST(graph);
-//        System.out.println(kruskalMST.pathTo(6,39));
-//        System.out.println("++++++++++++++++++++++++++++++++++++");
-//        DijkstraSP dijkstraSP = new DijkstraSP(graph,6);
-//        System.out.println(dijkstraSP.pathTo(39).toString());
+        System.out.println("++++++++++++++++++++++++++++++++++++");
+        KruskalMST kruskalMST = new KruskalMST(graph);
+        System.out.println(kruskalMST.pathTo(38,1));
+        System.out.println("++++++++++++++++++++++++++++++++++++");
+        System.out.println(dijkstraAllSP.path(38,1)+" - "+dijkstraAllSP.cost(38,1));
+
 
         return new String[]{"17","\r\n","0 8 0 20"};
     }
