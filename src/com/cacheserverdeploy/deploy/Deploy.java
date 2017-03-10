@@ -2,6 +2,7 @@ package com.cacheserverdeploy.deploy;
 
 import com.cacheserverdeploy.deploy.dataStructure.Graph;
 import com.cacheserverdeploy.deploy.dataStructure.KruskalMST;
+import com.cacheserverdeploy.deploy.method.DijkstraAllSP;
 import com.cacheserverdeploy.deploy.method.DijkstraSP;
 
 import java.util.Arrays;
@@ -18,13 +19,18 @@ public class Deploy
     public static String[] deployServer(String[] graphContent)
     {
         Graph graph = new Graph(graphContent);
-        System.out.println(graph.toString());
-        System.out.println("++++++++++++++++++++++++++++++++++++");
-        KruskalMST kruskalMST = new KruskalMST(graph);
-        System.out.println(kruskalMST.pathTo(26,39));
-        System.out.println("++++++++++++++++++++++++++++++++++++");
-        DijkstraSP dijkstraSP = new DijkstraSP(graph,26);
-        System.out.println(dijkstraSP.pathTo(39).toString());
+        Long start = System.currentTimeMillis();
+        DijkstraAllSP dijkstraAllSP = new DijkstraAllSP(graph);
+        System.out.println(System.currentTimeMillis()-start);
+        System.out.println(dijkstraAllSP.path(6,39));
+        System.out.println(dijkstraAllSP.path(26,39));
+//        System.out.println(graph.toString());
+//        System.out.println("++++++++++++++++++++++++++++++++++++");
+//        KruskalMST kruskalMST = new KruskalMST(graph);
+//        System.out.println(kruskalMST.pathTo(6,39));
+//        System.out.println("++++++++++++++++++++++++++++++++++++");
+//        DijkstraSP dijkstraSP = new DijkstraSP(graph,6);
+//        System.out.println(dijkstraSP.pathTo(39).toString());
 
         return new String[]{"17","\r\n","0 8 0 20"};
     }
