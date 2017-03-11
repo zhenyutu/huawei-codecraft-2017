@@ -1,9 +1,6 @@
 package com.cacheserverdeploy.deploy.method;
 
-import com.cacheserverdeploy.deploy.dataStructure.Edge;
-import com.cacheserverdeploy.deploy.dataStructure.Graph;
-import com.cacheserverdeploy.deploy.dataStructure.IndexMinPQ;
-import com.cacheserverdeploy.deploy.dataStructure.Stack;
+import com.cacheserverdeploy.deploy.dataStructure.*;
 
 /**
  * Created by tuzhenyu on 17-3-10.
@@ -61,6 +58,18 @@ public class DijkstraSP {
         }
 
         return path;
+    }
+
+    public Iterable<Edge> edgePathTo(int t){
+        Stack<Edge> path = new Stack<>();
+        int tmp =t;
+        while (tmp != source){
+            Edge e = edgeTo[tmp];
+            path.push(e);
+            tmp = e.otherPoint(tmp);
+        }
+        return path;
+
     }
 
 //    private boolean check(EdgeWeightedDigraph G, int s) {

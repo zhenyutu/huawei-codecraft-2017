@@ -19,6 +19,10 @@ public class DijkstraAllSP {
         return all[s].pathTo(t);
     }
 
+    public Iterable<Edge> edgePath(int s , int t){
+        return all[s].edgePathTo(t);
+    }
+
     public Integer cost(int s,int t){
         return all[s].distTo(t);
     }

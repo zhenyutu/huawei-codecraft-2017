@@ -95,6 +95,15 @@ public class Graph {
         return bag;
     }
 
+    public Edge getEdge(int s,int t){
+        Edge edge = null;
+        for (Edge e : adj[s]){
+            if (e.otherPoint(s) == t)
+                edge = e;
+        }
+        return edge;
+    }
+
     public Iterable<Edge> getAdj(int vertex){
         return adj[vertex];
     }

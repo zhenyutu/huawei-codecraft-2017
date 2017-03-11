@@ -30,6 +30,7 @@ public class Deploy
         System.out.println(kruskalMST.pathTo(38,1));
         System.out.println("++++++++++++++++++++++++++++++++++++");
         System.out.println(dijkstraAllSP.path(38,1)+" - "+dijkstraAllSP.cost(38,1));
+        System.out.println(dijkstraAllSP.edgePath(38,1));
 
 
         return new String[]{"17","\r\n","0 8 0 20"};
