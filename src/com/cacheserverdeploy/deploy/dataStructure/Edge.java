@@ -9,13 +9,14 @@ public class Edge implements Comparable<Edge>{
     private int endPoint;
     private int cost;
     private int capacity;
-    private int LastCapacity;
+    private int lastCapacity;
 
     public Edge(int startPoint,int endPoint,int cost,int capacity,int lastCapacity){
         this.startPoint = startPoint;
         this.endPoint = endPoint;
         this.cost = cost;
         this.capacity = capacity;
+        this.lastCapacity = capacity;
     }
 
     public Integer getCost(){
@@ -24,6 +25,14 @@ public class Edge implements Comparable<Edge>{
 
     public Integer getCapacity(){
         return capacity;
+    }
+
+    public Integer getLastCapacity(){
+        return lastCapacity;
+    }
+
+    public void  setLastCapacity(int value){
+        this.lastCapacity = value;
     }
 
     public Integer getStartPoint(){
@@ -41,6 +50,13 @@ public class Edge implements Comparable<Edge>{
             return startPoint;
         else
             throw new RuntimeException("Inconsistent edge");
+    }
+
+    public void exchange(){
+        int tmp = this.startPoint;
+        this.startPoint = this.endPoint;
+        this.endPoint = tmp;
+
     }
 
     public int compareTo(Edge edge){

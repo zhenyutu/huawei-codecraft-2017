@@ -1,5 +1,7 @@
 package com.cacheserverdeploy.deploy.dataStructure;
 
+import com.sun.org.apache.regexp.internal.RE;
+
 import java.util.Scanner;
 
 /**
@@ -11,6 +13,7 @@ public class Graph {
     private int edgeNum;
     private Bag<Edge>[] adj;
     private Integer[][] consumer;
+    private Integer[] hunger;
     private Boolean[] source;
     private Integer sumOfConsumeValue = 0;
 
@@ -19,6 +22,7 @@ public class Graph {
         this.edgeNum = 0;
         this.adj = (Bag<Edge>[]) new Bag[vertexNum];
         this.source = new Boolean[vertexNum];
+        this.hunger = new Integer[vertexNum];
 
         for (int i=0;i<vertexNum;i++){
             source[i] = false;
@@ -55,6 +59,7 @@ public class Graph {
             int consumeValue = tempScanner.nextInt();
             consumer[i][0]=consumeNode;
             consumer[i][1] = consumeValue;
+            hunger[consumeNode] = consumeValue;
             sumOfConsumeValue+=consumeValue;
         }
     }
@@ -71,6 +76,17 @@ public class Graph {
         return consumer;
     }
 
+    public  Integer[] getHunger(){
+        return hunger;
+    }
+
+    public  Integer getHunger(int vertex){
+        return hunger[vertex];
+    }
+
+    public void setHunger(int i,Integer value){
+        hunger[i] = value;
+    }
 
     public Integer getSumOfConsumeValue(){
        return sumOfConsumeValue;
@@ -98,13 +114,15 @@ public class Graph {
     public Edge getEdge(int s,int t){
         Edge edge = null;
         for (Edge e : adj[s]){
-            if (e.otherPoint(s) == t)
+            if (e.otherPoint(s) == t){
                 edge = e;
+                break;
+            }
         }
         return edge;
     }
 
-    public Iterable<Edge> getAdj(int vertex){
+    public Bag<Edge> getAdj(int vertex){
         return adj[vertex];
     }
 

@@ -65,11 +65,16 @@ public class DijkstraSP {
         int tmp =t;
         while (tmp != source){
             Edge e = edgeTo[tmp];
+            if (e.getEndPoint()!=tmp)
+                e.exchange();
             path.push(e);
             tmp = e.otherPoint(tmp);
         }
         return path;
+    }
 
+    public Edge firstEdgePathTo(int t){
+        return  edgeTo[t];
     }
 
 //    private boolean check(EdgeWeightedDigraph G, int s) {

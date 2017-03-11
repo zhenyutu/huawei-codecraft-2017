@@ -4,6 +4,7 @@ import com.cacheserverdeploy.deploy.dataStructure.Graph;
 import com.cacheserverdeploy.deploy.dataStructure.KruskalMST;
 import com.cacheserverdeploy.deploy.method.DijkstraAllSP;
 import com.cacheserverdeploy.deploy.method.DijkstraSP;
+import com.cacheserverdeploy.deploy.method.SeekRoad;
 import com.cacheserverdeploy.deploy.method.SourcePiont;
 
 import java.util.Arrays;
@@ -31,6 +32,10 @@ public class Deploy
         System.out.println("++++++++++++++++++++++++++++++++++++");
         System.out.println(dijkstraAllSP.path(38,1)+" - "+dijkstraAllSP.cost(38,1));
         System.out.println(dijkstraAllSP.edgePath(38,1));
+        System.out.println(dijkstraAllSP.firstEdgePath(38,1));
+
+        SeekRoad seekRoad = new SeekRoad(graph,dijkstraAllSP);
+        System.out.println(Arrays.toString(graph.getHunger()));
 
 
         return new String[]{"17","\r\n","0 8 0 20"};

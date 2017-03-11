@@ -23,6 +23,10 @@ public class DijkstraAllSP {
         return all[s].edgePathTo(t);
     }
 
+    public Edge firstEdgePath(int s , int t){
+        return all[t].firstEdgePathTo(s);
+    }
+
     public Integer cost(int s,int t){
         return all[s].distTo(t);
     }
