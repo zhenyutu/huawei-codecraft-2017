@@ -1,6 +1,9 @@
 package com.cacheserverdeploy.deploy.method;
 
 import com.cacheserverdeploy.deploy.dataStructure.*;
+import org.apache.log4j.Logger;
+
+import java.util.Arrays;
 
 /**
  * Created by tuzhenyu on 17-3-10.
@@ -12,6 +15,9 @@ public class SeekRoad {
     private IndexMaxPQ<Integer> pq;
     private Boolean[] sourcePiont;
     private int vertexNum;
+
+    static Logger logger = Logger.getLogger (SeekRoad.class);
+
 
     public SeekRoad(Graph graph,DijkstraAllSP dijkstraAllSP){
         this.graph = graph;
@@ -26,7 +32,9 @@ public class SeekRoad {
             pq.insert(startPoint,dijkstraAllSP.cost(startPoint,targetPoint));
         }
         while (!pq.isEmpty()){
+            System.out.println(Arrays.toString(graph.getHunger()));
             int vertex = pq.delMax();
+            System.out.println(vertex);
             int target = getSourcePoint(vertex);
             seek(vertex,target);
 
@@ -75,13 +83,23 @@ public class SeekRoad {
                                 e.setLastCapacity(e.getLastCapacity()-edgeStartPointHunger);
                                 graph.setHunger(next,edgeStartPointHunger);
                                 graph.setHunger(edgeStartPoint,0);
-                                pq.insert(next,dijkstraAllSP.cost(next,t));
+                                if (pq.contains(next)){
+                                    int temp = pq.keyOf(next);
+                                    pq.changeKey(next,temp+dijkstraAllSP.cost(next,t));
+                                }else {
+                                    pq.insert(next,dijkstraAllSP.cost(next,t));
+                                }
                                 break;
                             }else if(e.getLastCapacity()>0 && e.getLastCapacity()< edgeStartPointHunger){
                                 e.setLastCapacity(0);
                                 graph.setHunger(edgeStartPoint,edgeStartPointHunger-e.getLastCapacity());
                                 graph.setHunger(next,edge.getLastCapacity());
-                                pq.insert(next,dijkstraAllSP.cost(next,t));
+                                if (pq.contains(next)){
+                                    int temp = pq.keyOf(next);
+                                    pq.changeKey(next,temp+dijkstraAllSP.cost(next,t));
+                                }else {
+                                    pq.insert(next,dijkstraAllSP.cost(next,t));
+                                }
                             }
                         }
                     }
@@ -89,18 +107,23 @@ public class SeekRoad {
                 }
             }
             for (Integer vertex : dijkstraAllSP.path(s,t)){
+                int tmpHunger = graph.getHunger(vertex);
                 if (graph.getHunger(vertex)!= 0){
-                    pq.insert(vertex,dijkstraAllSP.cost(vertex,t));
+                    if (pq.contains(vertex)){
+                        int temp = pq.keyOf(vertex);
+                        pq.changeKey(vertex,temp+tmpHunger);
+                    }else {
+                        pq.insert(vertex,tmpHunger);
+                    }
                 }
             }
         }else{
-
+            throw new RuntimeException("hunger is wrong");
         }
-
     }
 
     private IndexMinPQ<Integer> minAdj(int s,int t){
-        IndexMinPQ<Integer> mpq = new IndexMinPQ<>(graph.getAdj(s).length());
+        IndexMinPQ<Integer> mpq = new IndexMinPQ<>(graph.getVertexNum());
         for (Edge edge:graph.getAdj(s)){
             int start = edge.otherPoint(s);
             mpq.insert(start,dijkstraAllSP.cost(start,t)+edge.getCost());

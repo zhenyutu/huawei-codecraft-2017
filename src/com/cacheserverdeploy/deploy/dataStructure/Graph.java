@@ -52,7 +52,7 @@ public class Graph {
             addEdge(new Edge(startPoint,endPoint,cost,capacity,capacity));
         }
         for (int i=0;i<consumeNum;i++){
-            Scanner tempScanner = new Scanner(graphContent[i+6]);
+            Scanner tempScanner = new Scanner(graphContent[i+5+edgeNum]);
             tempScanner.useDelimiter(" ");
             int consumePoint = tempScanner.nextInt();
             int consumeNode = tempScanner.nextInt();
