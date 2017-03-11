@@ -23,7 +23,7 @@ public class Bag<Item> implements Iterable<Item>{
         count++;
     }
 
-    public Integer length(){
+    public int length(){
         return count;
     }
 

@@ -12,17 +12,17 @@ public class Graph {
     private int vertexNum;
     private int edgeNum;
     private Bag<Edge>[] adj;
-    private Integer[][] consumer;
-    private Integer[] hunger;
+    private int[][] consumer;
+    private int[] hunger;
     private Boolean[] source;
-    private Integer sumOfConsumeValue = 0;
+    private int sumOfConsumeValue = 0;
 
     public Graph(int vertexNum){
         this.vertexNum = vertexNum;
         this.edgeNum = 0;
         this.adj = (Bag<Edge>[]) new Bag[vertexNum];
         this.source = new Boolean[vertexNum];
-        this.hunger = new Integer[vertexNum];
+        this.hunger = new int[vertexNum];
 
         for (int i=0;i<vertexNum;i++){
             source[i] = false;
@@ -40,7 +40,7 @@ public class Graph {
         int vertexNum = scanner.nextInt();
         int edgeNum = scanner.nextInt();
         int consumeNum = scanner.nextInt();
-        consumer = new Integer[consumeNum][2];
+        consumer = new int[consumeNum][2];
         for(int i=0;i<edgeNum;i++){
             Scanner tempScanner = new Scanner(graphContent[i+4]);
             tempScanner.useDelimiter(" ");
@@ -72,23 +72,23 @@ public class Graph {
         return edgeNum;
     }
 
-    public Integer[][] getConsumer(){
+    public int[][] getConsumer(){
         return consumer;
     }
 
-    public  Integer[] getHunger(){
+    public  int[] getHunger(){
         return hunger;
     }
 
-    public  Integer getHunger(int vertex){
+    public  int getHunger(int vertex){
         return hunger[vertex];
     }
 
-    public void setHunger(int i,Integer value){
+    public void setHunger(int i,int value){
         hunger[i] = value;
     }
 
-    public Integer getSumOfConsumeValue(){
+    public int getSumOfConsumeValue(){
        return sumOfConsumeValue;
     }
 

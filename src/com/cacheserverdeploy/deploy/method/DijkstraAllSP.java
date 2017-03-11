@@ -27,7 +27,7 @@ public class DijkstraAllSP {
         return all[t].firstEdgePathTo(s);
     }
 
-    public Integer cost(int s,int t){
+    public int cost(int s,int t){
         return all[s].distTo(t);
     }
 }

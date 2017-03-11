@@ -19,15 +19,15 @@ public class Edge implements Comparable<Edge>{
         this.lastCapacity = capacity;
     }
 
-    public Integer getCost(){
+    public int getCost(){
         return cost;
     }
 
-    public Integer getCapacity(){
+    public int getCapacity(){
         return capacity;
     }
 
-    public Integer getLastCapacity(){
+    public int getLastCapacity(){
         return lastCapacity;
     }
 
@@ -35,15 +35,15 @@ public class Edge implements Comparable<Edge>{
         this.lastCapacity = value;
     }
 
-    public Integer getStartPoint(){
+    public int getStartPoint(){
         return startPoint;
     }
 
-    public Integer getEndPoint(){
+    public int getEndPoint(){
         return endPoint;
     }
 
-    public Integer otherPoint(Integer vertex){
+    public int otherPoint(int vertex){
         if (vertex == startPoint)
             return endPoint;
         else if (vertex == endPoint)
