@@ -23,9 +23,9 @@ public class Deploy
     {
 
         Graph graph = new Graph(graphContent);
-        logger.info(graph.toString());
+        logger.info("初始饥饿数组："+Arrays.toString(graph.getHunger()));
         SourcePiont.getSourcePoint(graph);
-        logger.info(Arrays.toString(graph.getSource()));
+        logger.info("汇入点："+Arrays.toString(graph.getSource()));
         DijkstraAllSP dijkstraAllSP = new DijkstraAllSP(graph);
 //        System.out.println(Arrays.toString(graph.getSource()));
 //        System.out.println("++++++++++++++++++++++++++++++++++++");
@@ -36,8 +36,8 @@ public class Deploy
 //        System.out.println(dijkstraAllSP.edgePath(38,1));
 //        System.out.println(dijkstraAllSP.firstEdgePath(38,1));
 
-//        SeekRoad seekRoad = new SeekRoad(graph,dijkstraAllSP);
-//        System.out.println(Arrays.toString(graph.getHunger()));
+        SeekRoad seekRoad = new SeekRoad(graph,dijkstraAllSP);
+        System.out.println(Arrays.toString(graph.getHunger()));
 
         return new String[]{"17","\r\n","0 8 0 20"};
     }

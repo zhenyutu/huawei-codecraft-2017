@@ -29,13 +29,20 @@ public class SeekRoad {
         for (int v=0;v<graph.getConsumer().length;v++){
             int startPoint = graph.getConsumer()[v][0];
             int targetPoint = getSourcePoint(startPoint);
+            logger.info("目标汇入点："+startPoint+":"+targetPoint);
             pq.insert(startPoint,dijkstraAllSP.cost(startPoint,targetPoint));
         }
+        for (Integer i : pq){
+            logger.info("执行消费节点"+i+"-"+pq.keyOf(i));
+        }
         while (!pq.isEmpty()){
-            System.out.println(Arrays.toString(graph.getHunger()));
+            for (Integer i : pq){
+                logger.info("执行消费节点"+i+"-"+pq.keyOf(i)+":"+graph.getHunger(i));
+            }
             int vertex = pq.delMax();
-            System.out.println(vertex);
+            logger.info("当前执行消费点："+vertex);
             int target = getSourcePoint(vertex);
+            logger.info("当前消费点的汇入点："+target);
             seek(vertex,target);
 
         }
@@ -57,48 +64,94 @@ public class SeekRoad {
     }
 
     private void seek(int s,int t){
+        logger.info("进入寻路算法");
         int hunger = graph.getHunger(s);
+        logger.info("当前执行消费点饥饿值："+hunger);
+        logger.info("当前消费点路径:"+dijkstraAllSP.path(s,t));
         if (hunger>0){
             for (Edge edge : dijkstraAllSP.edgePath(s,t)){
                 int edgeStartPoint = edge.getStartPoint();
                 int edgeEndPoint = edge.getEndPoint();
                 int edgeStartPointHunger = graph.getHunger(edgeStartPoint);
                 int edgeLastCapacity = edge.getLastCapacity();
+                logger.info("开始计算边("+edgeStartPoint+"-"+edgeEndPoint+")");
+                logger.info("当前边的起始点的饥饿值："+edgeStartPointHunger);
+                logger.info("当前边的剩余容量："+edgeLastCapacity);
 
                 if (edgeLastCapacity >=edgeStartPointHunger){
+                    logger.info("容量大于饥饿值");
                     edge.setLastCapacity(edge.getLastCapacity()-edgeStartPointHunger);
-                    graph.setHunger(edgeEndPoint,edgeStartPointHunger);
+                    if (graph.getHunger(edgeEndPoint) == null)
+                        graph.setHunger(edgeEndPoint,edgeStartPointHunger);
+                    else
+                        graph.setHunger(edgeEndPoint,(edgeStartPointHunger+graph.getHunger(edgeEndPoint)));
                     graph.setHunger(edgeStartPoint,0);
-                }else if(edgeLastCapacity >0 && edgeLastCapacity < edgeStartPointHunger){
+                    logger.info("饿数组："+Arrays.toString(graph.getHunger()));
+                }else if(edgeLastCapacity >0 && (edgeLastCapacity < edgeStartPointHunger)){
+                    logger.info("容量小于饥饿值");
+                    logger.info(edgeStartPoint+"***"+(edgeStartPointHunger-edge.getLastCapacity()));
+                    graph.setHunger(edgeStartPoint,(edgeStartPointHunger-edge.getLastCapacity()));
+                    if (graph.getHunger(edgeEndPoint) == null)
+                        graph.setHunger(edgeEndPoint,edge.getLastCapacity());
+                    else
+                        graph.setHunger(edgeEndPoint,(edge.getLastCapacity()+graph.getHunger(edgeEndPoint)));
+                    logger.info("饿数组："+Arrays.toString(graph.getHunger()));
                     edge.setLastCapacity(0);
-                    graph.setHunger(edgeStartPoint,edgeStartPointHunger-edge.getLastCapacity());
-                    graph.setHunger(edgeEndPoint,edge.getLastCapacity());
                 }else {
+                    logger.info("容量为０");
                     IndexMinPQ<Integer> mpq = minAdj(edgeStartPoint,t);
+                    for (Integer i : mpq){
+                        logger.info("当前边容量为0,准备跳转节点"+i+"-"+mpq.keyOf(i));
+                    }
                     while (!mpq.isEmpty()){
                         int next = mpq.delMin();
+                        logger.info("跳转节点为："+next);
                         Edge e = graph.getEdge(edgeStartPoint,next);
+                        int eLastCapacity = e.getLastCapacity();
+                        int spHunger = graph.getHunger(e.getStartPoint());
+                        logger.info("跳转边为："+e.getStartPoint()+"-"+e.getEndPoint());
+                        logger.info("跳转边剩余容量："+e.getLastCapacity());
                         if (e.getLastCapacity() != 0){
-                            if (e.getLastCapacity()>=edgeStartPointHunger){
-                                e.setLastCapacity(e.getLastCapacity()-edgeStartPointHunger);
-                                graph.setHunger(next,edgeStartPointHunger);
-                                graph.setHunger(edgeStartPoint,0);
+                            logger.info("跳转边剩余容量不为0");
+                            if (eLastCapacity>=spHunger){
+                                logger.info("跳转边剩余容量大于饥饿值");
+                                e.setLastCapacity(e.getLastCapacity()-e.getStartPoint());
+                                logger.info("当前边的剩余容量："+e.getLastCapacity());
+                                if (graph.getHunger(next) == null)
+                                    graph.setHunger(next,graph.getHunger(e.getStartPoint()));
+                                else
+                                    graph.setHunger(next,(graph.getHunger(e.getStartPoint())+graph.getHunger(next)));
+                                graph.setHunger(e.getStartPoint(),0);
+                                logger.info("饿数组："+Arrays.toString(graph.getHunger()));
                                 if (pq.contains(next)){
-                                    int temp = pq.keyOf(next);
-                                    pq.changeKey(next,temp+dijkstraAllSP.cost(next,t));
+                                    logger.info("消费节点数组中已经存在："+next);
                                 }else {
+                                    logger.info("插入消费节点数组");
                                     pq.insert(next,dijkstraAllSP.cost(next,t));
                                 }
+                                for (Integer i : pq){
+                                    logger.info("执行消费节点"+i+"-"+pq.keyOf(i));
+                                }
                                 break;
-                            }else if(e.getLastCapacity()>0 && e.getLastCapacity()< edgeStartPointHunger){
+                            }else if(e.getLastCapacity()>0 && e.getLastCapacity()< graph.getHunger(e.getStartPoint())){
+                                logger.info("跳转边剩余容量小于饥饿值");
+                                graph.setHunger(edgeStartPoint,graph.getHunger(e.getStartPoint())-e.getLastCapacity());
+                                logger.info("当前边的剩余容量："+e.getLastCapacity());
+                                if (graph.getHunger(next) == null)
+                                    graph.setHunger(next,e.getLastCapacity());
+                                else
+                                    graph.setHunger(next,(e.getLastCapacity()+graph.getHunger(next)));
                                 e.setLastCapacity(0);
-                                graph.setHunger(edgeStartPoint,edgeStartPointHunger-e.getLastCapacity());
-                                graph.setHunger(next,edge.getLastCapacity());
+                                logger.info("当前边的剩余容量："+e.getLastCapacity());
+                                logger.info("饿数组："+Arrays.toString(graph.getHunger()));
                                 if (pq.contains(next)){
-                                    int temp = pq.keyOf(next);
-                                    pq.changeKey(next,temp+dijkstraAllSP.cost(next,t));
+                                    logger.info("消费节点数组中已经存在："+next);
                                 }else {
+                                    logger.info("插入消费节点数组");
                                     pq.insert(next,dijkstraAllSP.cost(next,t));
+                                }
+                                for (Integer i : pq){
+                                    logger.info("执行消费节点"+i+"-"+pq.keyOf(i));
                                 }
                             }
                         }
@@ -109,11 +162,9 @@ public class SeekRoad {
             for (Integer vertex : dijkstraAllSP.path(s,t)){
                 int tmpHunger = graph.getHunger(vertex);
                 if (graph.getHunger(vertex)!= 0){
-                    if (pq.contains(vertex)){
-                        int temp = pq.keyOf(vertex);
-                        pq.changeKey(vertex,temp+tmpHunger);
-                    }else {
-                        pq.insert(vertex,tmpHunger);
+                    logger.info("插入消费节点数组"+vertex);
+                    if (!pq.contains(vertex)) {
+                        pq.insert(vertex, dijkstraAllSP.cost(vertex, t));
                     }
                 }
             }
